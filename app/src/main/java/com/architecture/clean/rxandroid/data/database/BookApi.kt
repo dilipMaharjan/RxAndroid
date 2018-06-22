@@ -1,6 +1,6 @@
-package com.architecture.clean.rxandroid.api
+package com.architecture.clean.rxandroid.data.database
 
-import com.architecture.clean.rxandroid.data.Book
+import com.architecture.clean.rxandroid.datamodel.Book
 
 class BookApi {
     fun getBookList(): List<Book> {
