@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.architecture.clean.rxandroid.data.api.GitHubApi
 import com.architecture.clean.rxandroid.datamodel.GitHubDataModel
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,7 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MAINACTIVITY"
-
+    private val repoList = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,7 +31,13 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<List<GitHubDataModel>> {
             override fun onResponse(call: Call<List<GitHubDataModel>>?, response: Response<List<GitHubDataModel>>?) {
                 if (response != null) {
-                    Log.i(TAG, response.body().toString())
+                    val response = response.body()
+                    if (response != null) {
+                        for (repo in response) {
+                            repoList.add(repo.name)
+
+                        }
+                    }
                 }
             }
 
